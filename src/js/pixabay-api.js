@@ -1,20 +1,7 @@
 import axios from "axios";
+export default getImagesByQuery;
 
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
-// import { preview } from "vite";
 
-const searchButton = document.querySelector("button");
-const searchField = document.querySelector("input");
-const container = document.querySelector(".gallery");
-
-searchButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    //перевірка на те що рядок не пустий .trim()
-    const data = getImagesByQuery(searchField.value);
-    console.log(data);
-
-});
     
 function getImagesByQuery(query) {
     return axios({
@@ -31,23 +18,52 @@ function getImagesByQuery(query) {
     .then(response => {
         if (response.data.hits.length > 0) {
             console.log(response.data.hits);
-            container.insertAdjacentHTML("beforeend", createMarkup(response.data.hits));
+            return response.data.hits;
+            // container.insertAdjacentHTML("beforeend",createMarkup(response.data.hits));
         } else {
             throw new Error();
         }
     })
-    .catch(error => {
-        iziToast.error({
-            message: 'Sorry, there are no images matching your search query. Please try again!',
-            position: 'topRight'
-        });
-    });
+    .catch(error => { return error });
+    // (error => {
+    // iziToast.error({
+    //     message: 'Sorry, there are no images matching your search query. Please try again!',
+    //     position: 'topRight'
+    // });    
 }
 
-function createMarkup(arr) {
-    return arr.map(({ id, previewURL, tags }) =>
-        `<li data-id="${id}">
-        <img src='${previewURL}' alt='${tags}' width="300">
-    </li>`).join("");
-}
+// function createMarkup(arr) {
+//     return arr.map(({ id, webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
+//         `<li data-id="${id}" class="gallery-item">
+//           <div class="card">
+//             <div class="card-img">
+//                 <a class="gallery-link" href="${largeImageURL}">
+//                 <img
+//                     class="gallery-image"
+//                     src="${webformatURL}"
+//                     alt="${tags}"
+//                 />
+//               </a>
+//             </div>
+//             <div class="card-info">
+//               <div class="info-box">
+//                 <p class="card-header">Likes</p>
+//                 <p class="card-value">${likes}</p>
+//               </div>
+//               <div class="info-box">
+//                 <p class="card-header">Views</p>
+//                 <p class="card-value">${views}</p>
+//               </div>
+//               <div class="info-box">
+//                 <p class="card-header">Comments</p>
+//                 <p class="card-value">${comments}</p>
+//               </div>
+//               <div class="info-box">
+//                 <p class="card-header">Downloads</p>
+//                 <p class="card-value">${downloads}</p>
+//               </div>
+//             </div>
+//           </div>
+//         </li>`).join("");
+// }
 // export default function getImagesByQuery(query);

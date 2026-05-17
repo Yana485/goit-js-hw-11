@@ -11,9 +11,10 @@ import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-// import data from "./pixabay-api";
-// console.log(`FILE #2: ${data}`);
 
-// import makeMessage from "./pixabay-api.js";
+// let gallery = new SimpleLightbox('.card-img a');
+// gallery.on('show.simplelightbox', function () {
+// 	// Do something…
+// });
 
-// console.log(makeMessage("Jacob"));
+// gallery.refresh();
