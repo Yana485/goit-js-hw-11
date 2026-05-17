@@ -2,14 +2,18 @@ import axios from "axios";
 
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+// import { preview } from "vite";
 
 const searchButton = document.querySelector("button");
 const searchField = document.querySelector("input");
-
+const container = document.querySelector(".gallery");
 
 searchButton.addEventListener("click", function (event) {
     event.preventDefault();
+    //перевірка на те що рядок не пустий .trim()
     const data = getImagesByQuery(searchField.value);
+    console.log(data);
+
 });
     
 function getImagesByQuery(query) {
@@ -25,10 +29,11 @@ function getImagesByQuery(query) {
         }
     })
     .then(response => {
-        if (response.data.hits.length === 0) {
-            throw new Error();
+        if (response.data.hits.length > 0) {
+            console.log(response.data.hits);
+            container.insertAdjacentHTML("beforeend", createMarkup(response.data.hits));
         } else {
-            return response.data;
+            throw new Error();
         }
     })
     .catch(error => {
@@ -39,4 +44,10 @@ function getImagesByQuery(query) {
     });
 }
 
+function createMarkup(arr) {
+    return arr.map(({ id, previewURL, tags }) =>
+        `<li data-id="${id}">
+        <img src='${previewURL}' alt='${tags}' width="300">
+    </li>`).join("");
+}
 // export default function getImagesByQuery(query);

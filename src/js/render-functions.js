@@ -14,6 +14,6 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 // import data from "./pixabay-api";
 // console.log(`FILE #2: ${data}`);
 
-import makeMessage from "./pixabay-api.js";
+// import makeMessage from "./pixabay-api.js";
 
-console.log(makeMessage("Jacob"));
+// console.log(makeMessage("Jacob"));
