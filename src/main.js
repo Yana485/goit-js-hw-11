@@ -14,12 +14,12 @@ searchButton.addEventListener("click", function (event) {
         container.innerHTML = '';
         getImagesByQuery(searchField.value)
           // .then(value => { console.log(value) })
-          .then(response => {
-            console.log(`response.length = ${response.length}`);
+          .then(value => {
+            console.log(`response.length = ${value.length}`);
             if (response.length > 0) {
-                console.log(`I'm going to call createGallery now: ${response}`);
+                console.log(`I'm going to call createGallery now: ${value}`);
                 // return response.data.hits;
-                container.insertAdjacentHTML("beforeend",createGallery(response));
+                return container.insertAdjacentHTML("beforeend",createGallery(value));
             } else {
                 throw new Error();
             }
