@@ -16,7 +16,7 @@ searchButton.addEventListener("click", function (event) {
           // .then(value => { console.log(value) })
           .then(value => {
             console.log(`response.length = ${value.length}`);
-            if (response.length > 0) {
+            if (value.length > 0) {
                 console.log(`I'm going to call createGallery now: ${value}`);
                 // return response.data.hits;
                 // return container.insertAdjacentHTML("beforeend",createGallery(value));
