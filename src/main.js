@@ -1,8 +1,8 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-import getImagesByQuery from "./js/pixabay-api"
-import { createGallery } from "./js/render-functions"
+import getImagesByQuery from "./js/pixabay-api.js"
+import { createGallery } from "./js/render-functions.js"
 
 const searchButton = document.querySelector("button");
 const searchField = document.querySelector("input");
