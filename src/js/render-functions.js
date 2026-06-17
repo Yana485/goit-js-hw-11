@@ -10,7 +10,7 @@
 import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
-export default createGallery;
+// export default createGallery;
 
 export function createGallery(images) {
     return images.map(({ id, webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
