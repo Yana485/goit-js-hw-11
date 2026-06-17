@@ -10,11 +10,39 @@
 import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
+export default createGallery;
 
-
-// let gallery = new SimpleLightbox('.card-img a');
-// gallery.on('show.simplelightbox', function () {
-// 	// Do something…
-// });
-
-// gallery.refresh();
+function createGallery(images) {
+    return images.map(({ id, webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
+        `<li data-id="${id}" class="gallery-item">
+          <div class="card">
+            <div class="card-img">
+                <a class="gallery-link" href="${largeImageURL}">
+                <img
+                    class="gallery-image"
+                    src="${webformatURL}"
+                    alt="${tags}"
+                />
+              </a>
+            </div>
+            <div class="card-info">
+              <div class="info-box">
+                <p class="card-header">Likes</p>
+                <p class="card-value">${likes}</p>
+              </div>
+              <div class="info-box">
+                <p class="card-header">Views</p>
+                <p class="card-value">${views}</p>
+              </div>
+              <div class="info-box">
+                <p class="card-header">Comments</p>
+                <p class="card-value">${comments}</p>
+              </div>
+              <div class="info-box">
+                <p class="card-header">Downloads</p>
+                <p class="card-value">${downloads}</p>
+              </div>
+            </div>
+          </div>
+        </li>`).join("");
+}
