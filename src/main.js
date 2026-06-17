@@ -12,8 +12,8 @@ searchButton.addEventListener("click", function (event) {
     event.preventDefault();
     if (searchField.value.trim().length > 0) {
         container.innerHTML = '';
-        const data = getImagesByQuery(searchField.value);
+        getImagesByQuery(searchField.value).then(value => { console.log(value) });
         searchField.value = "";
-        console.log(data);
+        // console.log(data);
     }
 });
