@@ -28,5 +28,5 @@ import{r as e}from"./assets/rolldown-runtime-DMWpINJ5.js";import{n as t,r as n,t
               </div>
             </div>
           </div>
-        </li>`).join(``)}var l=document.querySelector(`button`),u=document.querySelector(`input`),d=document.querySelector(`.gallery`);l.addEventListener(`click`,function(e){e.preventDefault(),u.value.trim().length>0&&(d.innerHTML=``,a(u.value).then(e=>{if(console.log(`response.length = ${e.length}`),response.length>0)return console.log(`I'm going to call createGallery now: ${e}`),d.insertAdjacentHTML(`beforeend`,s(e));throw Error()}).catch(e=>{i.default.error({message:`Sorry, there are no images matching your search query. Please try again!`,position:`topRight`})}),u.value=``)});
+        </li>`).join(``)}var l=document.querySelector(`button`),u=document.querySelector(`input`),d=document.querySelector(`.gallery`);l.addEventListener(`click`,function(e){e.preventDefault(),u.value.trim().length>0&&(d.innerHTML=``,a(u.value).then(e=>{if(console.log(`response.length = ${e.length}`),response.length>0)return console.log(`I'm going to call createGallery now: ${e}`),d.insertAdjacentHTML(`beforeend`,s(e));throw Error()}).catch(e=>{console.log(e),i.default.error({message:`Sorry, there are no images matching your search query. Please try again!`,position:`topRight`})}),u.value=``)});
 //# sourceMappingURL=index.js.map
