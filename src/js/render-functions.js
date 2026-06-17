@@ -7,9 +7,9 @@
 - hideLoader(). Ця функція нічого не приймає, повинна прибирати клас для відображення лоадера. Нічого не повертає.
 */
 // Описаний у документації
-import SimpleLightbox from "simplelightbox";
+// import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
+// import "simplelightbox/dist/simple-lightbox.min.css";
 // export default createGallery;
 
 export function createGallery(images) {
