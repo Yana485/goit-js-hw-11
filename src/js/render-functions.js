@@ -12,7 +12,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 export default createGallery;
 
-function createGallery(images) {
+export function createGallery(images) {
     return images.map(({ id, webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
         `<li data-id="${id}" class="gallery-item">
           <div class="card">
