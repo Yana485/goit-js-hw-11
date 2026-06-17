@@ -30,7 +30,7 @@ searchButton.addEventListener("click", function (event) {
                 message: 'Sorry, there are no images matching your search query. Please try again!',
                 position: 'topRight'
             });    
-        };
+        });
         searchField.value = "";
     }
 });
