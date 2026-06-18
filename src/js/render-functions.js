@@ -6,24 +6,25 @@
 - showLoader(). Ця функція нічого не приймає, повинна додавати клас для відображення лоадера. Нічого не повертає.
 - hideLoader(). Ця функція нічого не приймає, повинна прибирати клас для відображення лоадера. Нічого не повертає.
 */
-// Описаний у документації
-// import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
-// import "simplelightbox/dist/simple-lightbox.min.css";
-// export default createGallery;
+import SimpleLightboxModule from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+const SimpleLightbox = SimpleLightboxModule.default;
+console.log(SimpleLightbox);
+// const gallery = $('.gallery-item a').simpleLightbox();
+new SimpleLightbox('.gallery-item a', { /* options */ });
+// gallery.refresh(); // Next Image
 
 export function createGallery(images) {
     return images.map(({ id, webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
-        `<li data-id="${id}" class="gallery-item">
+      `<li data-id="${id}" class="gallery-item">
+    <a class="gallery-link" href="${largeImageURL}">
           <div class="card">
             <div class="card-img">
-                <a class="gallery-link" href="${largeImageURL}">
                 <img
                     class="gallery-image"
                     src="${webformatURL}"
                     alt="${tags}"
                 />
-              </a>
             </div>
             <div class="card-info">
               <div class="info-box">
@@ -44,5 +45,12 @@ export function createGallery(images) {
               </div>
             </div>
           </div>
+          </a>
         </li>`).join("");
 }
+
+// new SimpleLightbox('.gallery-item a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
+

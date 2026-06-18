@@ -13,18 +13,14 @@ searchButton.addEventListener("click", function (event) {
     if (searchField.value.trim().length > 0) {
         container.innerHTML = '';
         getImagesByQuery(searchField.value)
-          // .then(value => { console.log(value) })
-          .then(value => {
-            console.log(`response.length = ${value.length}`);
+        .then(value => {
             if (value.length > 0) {
-                console.log(`I'm going to call createGallery now: ${value}`);
-                // return response.data.hits;
-                // return container.insertAdjacentHTML("beforeend",createGallery(value));
+                container.insertAdjacentHTML("beforeend",createGallery(value));
             } else {
                 throw new Error();
             }
         })
-        .catch//(error => { return error });
+        .catch
         (error => {
           console.log(error);
             iziToast.error({

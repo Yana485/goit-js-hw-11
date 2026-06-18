@@ -1,7 +1,5 @@
 import axios from "axios";
 export default getImagesByQuery;
-
-
     
 function getImagesByQuery(query) {
     return axios({
@@ -17,19 +15,12 @@ function getImagesByQuery(query) {
     })
     .then(response => {
         if (response.data.hits.length > 0) {
-            console.log(response.data.hits);
             return response.data.hits;
-            // container.insertAdjacentHTML("beforeend",createMarkup(response.data.hits));
         } else {
             throw new Error();
         }
     })
     .catch(error => { return error });
-    // (error => {
-    // iziToast.error({
-    //     message: 'Sorry, there are no images matching your search query. Please try again!',
-    //     position: 'topRight'
-    // });    
 }
 
 // function createMarkup(arr) {
