@@ -11,7 +11,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const SimpleLightbox = SimpleLightboxModule.default;
 console.log(SimpleLightbox);
 // const gallery = $('.gallery-item a').simpleLightbox();
-new SimpleLightbox('.gallery-item a', { /* options */ });
+// new SimpleLightbox('.gallery-item a', { /* options */ });
 // gallery.refresh(); // Next Image
 
 export function createGallery(images) {
