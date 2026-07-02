@@ -1,0 +1,35 @@
+SELECT a.*,
+       x.x__tr030,
+       h.achi020
+FROM acct a
+
+-- Latest X__TR record
+JOIN (
+    SELECT x__tr010,
+           MAX(x__tr030) AS max_tr_date
+    FROM x__tr
+    GROUP BY x__tr010
+) xt
+    ON a.acct001 = xt.x__tr010
+
+JOIN x__tr x
+    ON x.x__tr010 = xt.x__tr010
+   AND x.x__tr030 = xt.max_tr_date
+
+-- Latest ACHI record
+JOIN (
+    SELECT achi010,
+           MAX(achi020) AS max_achi_date
+    FROM achi
+    GROUP BY achi010
+) ah
+    ON a.acct001 = ah.achi010
+
+JOIN achi h
+    ON h.achi010 = ah.achi010
+   AND h.achi020 = ah.max_achi_date
+
+WHERE
+    -- ACCT conditions
+    xt.max_tr_date <= ADD_MONTHS(SYSDATE, -84)
+AND ah.max_achi_date <= ADD_MONTHS(SYSDATE, -84);
