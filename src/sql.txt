@@ -33,3 +33,27 @@ WHERE
     -- ACCT conditions
     xt.max_tr_date <= ADD_MONTHS(SYSDATE, -84)
 AND ah.max_achi_date <= ADD_MONTHS(SYSDATE, -84);
+
+
+
+
+
+
+-- Check to ensure there are no accounts that conflict with our no deletion rules (SC-5504)
+--If [Loan Stage Description]="Normal" Then "Do Not Delete";
+--If [Total Balance]<>0 Then "Do Not Delete";
+--If [Loan Status]=Live Then "Do Not Delete";
+--If [Account Closure Date] is Greater Than [Todays Date-7 years] or [Service End Date] is Greater Than [Todays Date-7 years] 
+--and Account Closure Date is not populated and all of the above conditions are false then "Do Not Delete";
+
+-- List of offending Accounts
+select ACCT003,ACCT010, ACCT013 from ACCT,EXP_ACCOUNT where ACCT001=CMM_ACCOUNT_IR and CMM_ACCOUNT_IR in (
+select acct001 from acct,slad,clad where acct001=slad001 and acct001=clad001 and 
+((clad045='N'
+OR ACCT1021+ACCT1022+ACCT1023+ACCT1024+ACCT1025+ACCT1026+ACCT1027+ACCT1028+ACCT1029+ACCT10210+ACCT10211+ACCT10212 <> 0 
+OR ACCT029='L')
+OR 
+((acct030 > add_months(SYSDATE,-84) or (slad640 > add_months(SYSDATE,-84) and acct030=to_date('01/01/1900','DD/MM/YYYY'))) 
+and clad045!='N' 
+and ACCT1021+ACCT1022+ACCT1023+ACCT1024+ACCT1025+ACCT1026+ACCT1027+ACCT1028+ACCT1029+ACCT10210+ACCT10211+ACCT10212 = 0 
+and ACCT029!='L')));
