@@ -57,3 +57,56 @@ OR
 and clad045!='N' 
 and ACCT1021+ACCT1022+ACCT1023+ACCT1024+ACCT1025+ACCT1026+ACCT1027+ACCT1028+ACCT1029+ACCT10210+ACCT10211+ACCT10212 = 0 
 and ACCT029!='L')));
+
+
+aaaaSELECT ACCT003, ACCT010, ACCT013
+FROM ACCT, EXP_ACCOUNT
+WHERE ACCT001 = CMM_ACCOUNT_IR
+AND CMM_ACCOUNT_IR IN (
+    SELECT acct001
+    FROM acct, slad, clad
+    WHERE acct001 = slad001
+      AND acct001 = clad001
+      AND (
+            (
+                clad045 = 'N'
+                OR ACCT1021+ACCT1022+ACCT1023+ACCT1024+ACCT1025+ACCT1026+
+                   ACCT1027+ACCT1028+ACCT1029+ACCT10210+ACCT10211+ACCT10212 <> 0
+                OR ACCT029 = 'L'
+            )
+            OR
+            (
+                (acct030 > ADD_MONTHS(SYSDATE,-84)
+                 OR (slad640 > ADD_MONTHS(SYSDATE,-84)
+                     AND acct030 = TO_DATE('01/01/1900','DD/MM/YYYY')))
+                AND clad045 != 'N'
+                AND ACCT1021+ACCT1022+ACCT1023+ACCT1024+ACCT1025+ACCT1026+
+                    ACCT1027+ACCT1028+ACCT1029+ACCT10210+ACCT10211+ACCT10212 = 0
+                AND ACCT029 != 'L'
+            )
+      )
+
+    AND EXISTS (
+        SELECT 1
+        FROM (
+            SELECT x__tr010,
+                   MAX(x__tr030) max_tr_date
+            FROM x__tr
+            GROUP BY x__tr010
+        ) xt
+        WHERE xt.x__tr010 = acct001
+          AND xt.max_tr_date <= ADD_MONTHS(SYSDATE,-84)
+    )
+
+    AND EXISTS (
+        SELECT 1
+        FROM (
+            SELECT achi010,
+                   MAX(achi020) max_achi_date
+            FROM achi
+            GROUP BY achi010
+        ) ah
+        WHERE ah.achi010 = acct001
+          AND ah.max_achi_date <= ADD_MONTHS(SYSDATE,-84)
+    )
+);
